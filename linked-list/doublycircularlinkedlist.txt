@@ -1,0 +1,41 @@
+
+
+1. declare struct
+2. make main
+3. input n
+4. initialize struct head n tail
+5. open for loop with n
+6. input value 
+7. make newdata struct with memory malloc
+8. check new data if ==null print faild, break
+9. assign newdata.n = i //int type (since in loop)
+10. assign newdata.value = value //int type
+
+11. insert pointer
+12. if head== null
+13. head, tail, newdata->next, newdata->prev all = newdata
+14. else 
+15. newdata->prev = tail
+16. newdata->next = head
+17. tail->next = newdata
+18. head->prev = newdata
+19. tail = newdata 
+
+20. to move and remove around list declare new struct current
+21. make newdata struct point at current next and current prev too 
+22. if (current->next == current)
+free current, head = null and break;
+23.else c_next->prev = c_prev
+24. c_prev->next = c_next
+25. if current == head, head= c_next
+26. free current
+
+27. now to move the step accoring to the value
+28. if +ve move foword
+current = c_next
+open for loop, current = current->next;
+29. else (-ve) move backword
+current = c_prev
+open for loop, current = current ->prev.
+
+and done!
