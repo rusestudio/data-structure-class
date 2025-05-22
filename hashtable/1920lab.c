@@ -38,6 +38,7 @@ HashTable* createHashTable(){
 
 //to modular capacity based on key to choose which index data would be insert
 //return will be from 0 ~ capacity
+//to make index based on the key and capacity n%m
 int Hash (int key, int capacity){
     return (key % capacity + capacity) % capacity;
     // incase the key have -ve value so +capacity to get +ve index
@@ -102,7 +103,8 @@ void resizeHashTable(HashTable* table){
     // double bucket *2
     //make memory calloc again coz resize, so make new space
     table->capacity = 2* oldCapacity;
-    table->bucket = (Node**)calloc(table->capacity, sizeof(Node*));
+    table->bucket = (Node**)calloc(table->capacity, sizeof(Node*)); //calloc already been initialize with null 
+    //buket type is node**
     //if current == old
     //make new hash value
     if(table->bucket == NULL){
@@ -127,6 +129,27 @@ void resizeHashTable(HashTable* table){
     free(oldBucket); //remove old bucket coz new we resize data to new hash
 }
 
+
+int Search(HashTable* table, int key){
+    int index = Hash(key, table->capacity); 
+
+    //table->buket[index] == *(bucket+index) == head pointer 
+    Node* current = table->bucket[index]; //node* type which is address <- this deference once = *(bucket+index)
+    //maybe can deference twice to get key
+    //deference *(current.key) will be equal to int key?
+    while(current != NULL){
+        if(current->key == key){
+            return 1;
+        }
+        current = current->next;
+    }
+    return 0;
+}
+
+void freeHashTable(HashTable* table){
+    free(table);
+}
+
 int main(){
 
     int n; //initialize size data
@@ -141,7 +164,16 @@ int main(){
         Insert(table, num); //insert data in table
     }
 
+    //insert data to be search
+    scanf("%d", &m);
+    for(int i=0; i< m; i++){
+        int num;
+        scanf("%d", &num);
+        printf("%d\n", Search(table,num) );
+    }
 
-
+    //free all hashtable after use all
+    freeHashTable(table);
+    return 0;
 
 }
