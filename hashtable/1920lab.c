@@ -41,6 +41,7 @@ HashTable* createHashTable(){
 int Hash (int key, int capacity){
     return (key % capacity + capacity) % capacity;
     // incase the key have -ve value so +capacity to get +ve index
+    // save version on n%m, incase n value is -ve
 }
 
 
