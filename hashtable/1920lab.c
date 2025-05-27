@@ -58,7 +58,7 @@ void Insert (HashTable* table, int key){
     //if key is not in the table
     while (current != NULL){
         if(current->key == key){
-            return;
+            return; //if duplicate key return non
         }
         current = current->next;
     }
@@ -96,7 +96,7 @@ Node* createNode(int key){
 
 void resizeHashTable(HashTable* table){
     //initialize oldcapacity
-    // init table bucke
+    // init table bucke 
     int oldCapacity = table->capacity;
     Node** oldBucket = table->bucket;
 
@@ -120,7 +120,7 @@ void resizeHashTable(HashTable* table){
             current = current->next;
             //make newindex
             int newIndex = Hash(nodeToRehash->key,table->capacity);
-
+  
             //reinsert newhash to next
             nodeToRehash->next = table->bucket[newIndex]; //head pointer to next newhash node
             table->bucket[newIndex]= nodeToRehash;
